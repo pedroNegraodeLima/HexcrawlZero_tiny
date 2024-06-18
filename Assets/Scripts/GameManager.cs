@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         hasCollectAll = false;
 
-        countCollectables = FindObjectsOfType<Collectible>().Length;
+        countCollectables = FindObjectsOfType<InspectStuff>().Length;
         Debug.Log($"encontrei: {countCollectables} coletaveis.");
 
         PlayerPickUp.OnPickUpCollectible += CountingTheCollectables;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         DialogueManager.OnDialogueFinish -= AllCollectedSpeech;
     }
 
-    private void CountingTheCollectables(Collectible item)
+    private void CountingTheCollectables(InspectStuff item)
     {
         countCollectables--;
         if (countCollectables <= 0)

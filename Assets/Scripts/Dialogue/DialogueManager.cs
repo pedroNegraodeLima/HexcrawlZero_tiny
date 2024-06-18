@@ -78,7 +78,7 @@ public class DialogueManager : MonoBehaviour
 
 
     
-    private void OnPickUpCollectible(Collectible obj)
+    private void OnPickUpCollectible(InspectStuff obj)
     {
         StartDialogue(obj.dialogue);
     }

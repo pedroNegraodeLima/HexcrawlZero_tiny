@@ -21630,6 +21630,7 @@ GameObject:
   - component: {fileID: 490018811}
   - component: {fileID: 490018810}
   - component: {fileID: 490018809}
+  - component: {fileID: 490018813}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
@@ -21723,6 +21724,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 295055830}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &490018813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490018808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea805cb90699fcd4fa5997627a598237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  dialogue:
+    descriptor: dogfart
+    texts:
+    - 'zica '
+    durations:
+    - 2
 --- !u!1 &509952968 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d008f4cf37bad047b46acc04bc204c6,
