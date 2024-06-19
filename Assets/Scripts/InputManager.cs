@@ -4,28 +4,16 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    PlayerInput playerInput;
-
     Vector2 movementInput;
     public float verticalInput;
     public float horizontalInput;
+    public Vector2 directionalInput;
+    public bool confirmButton;
+    public bool jumpButton;
+    public bool interactButton;
+    public bool leftClickButton;
 
-    private void OnEnable()
-    {
-        if (playerInput == null)
-        {
-            playerInput = new PlayerInput();
 
-            playerInput.CharControl.Move.started += context => movementInput = context.ReadValue<Vector2>();
-        }
-
-        playerInput.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerInput.Disable();
-    }
 
     public void HandleAllInputs()
     {
@@ -33,7 +21,13 @@ public class InputManager : MonoBehaviour
     }
     private void HandleMovimentInput()
     {
-        verticalInput = movementInput.y;
-        horizontalInput = movementInput.x;
+        verticalInput = Input.GetAxisRaw("Vertical");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        directionalInput = new Vector2(horizontalInput, verticalInput).normalized;
+
+        jumpButton = Input.GetButtonDown("Jump");
+        interactButton = Input.GetKeyDown(KeyCode.E);
+        leftClickButton = Input.GetMouseButtonDown(0);
+        confirmButton = jumpButton || interactButton || leftClickButton;
     }
 }
