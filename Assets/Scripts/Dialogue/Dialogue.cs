@@ -5,37 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue 
 {
-    public string descriptor;
+    public List<SentenceData> sentences = new List<SentenceData>();
 
-    [TextArea(3, 10)]
-    public List<string> texts;
-    public List<float> durations;
-
-    public Dialogue(Dialogue source)
+    [System.Serializable]
+    public class SentenceData
     {
-        this.descriptor = source.descriptor;
-        this.texts = new List<string>( source.texts);
-        this.durations = new List<float>( source.durations);
+        [TextArea(3, 10)]
+        public string texts = "insert text";
+        public bool isPressButtonToClose = true;
+        [Tooltip("Ignore if isPressButtonToClose")]
+        public float duration = 3f;
     }
 
-    public List<Sentences> GetMonologue()
-    {
-        var monologue = new List<Sentences>();
-
-        if (durations == null) durations = new List<float>();
-
-        if (durations.Count < texts.Count)
-        {
-            for (int i = 0; i < texts.Count; i++)
-            {
-                durations.Add(3);
-            }
-        }
-        for (int i = 0; i < texts.Count; i++)
-        {
-            monologue.Add(new Sentences() { text = texts[i],duration= durations[i]});
-        }
-
-        return monologue;
-    }
 }

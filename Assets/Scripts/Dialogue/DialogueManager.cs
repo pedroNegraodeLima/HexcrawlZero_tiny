@@ -7,23 +7,30 @@ using System;
 
 public class DialogueManager : MonoBehaviour
 {
+    private static DialogueManager instance;
     public static event System.Action OnDialogueFinish;
 
     public Text nameText;
     public TMP_Text dialogueText;
 
-    public Animator animator;
-
-
     private Dialogue currentDialogue;
+    private DialogueBoxUI dialogueBoxUI;
     [HideInInspector]
     public bool canDialogue;
 
+    private InputManager inputManager;
+
+    public static DialogueManager Get()
+    {
+        return instance;
+    }
+
     private void Awake()
     {
+        instance = this;
         canDialogue = true;
-
-
+        inputManager = FindObjectOfType<InputManager>();
+        dialogueBoxUI = FindObjectOfType<DialogueBoxUI>();
         PlayerPickUp.OnPickUpCollectible += OnPickUpCollectible;
     }
 
@@ -35,22 +42,32 @@ public class DialogueManager : MonoBehaviour
     {
         canDialogue = false;
         currentDialogue = dialogue;
-        animator.SetBool("IsOpen", true);
-
-        Debug.Log("Starting coversation with " + dialogue.descriptor);
+        dialogueBoxUI.ToggleDialogueBox(true);
 
         StartCoroutine( DisplayNextSentence());
     }
 
     public IEnumerator DisplayNextSentence()
     {
-        var monologue = currentDialogue.GetMonologue();
-        for (int i = 0; i < monologue.Count; i++)
+        if (currentDialogue == null) yield break;
+
+        for (int i = 0; i < currentDialogue.sentences.Count; i++)
         {
-            var sentence = monologue[i];
-            Debug.Log(sentence);
-            yield return StartCoroutine(TypeSentence(sentence.text));
-            yield return new WaitForSeconds(sentence.duration);
+            var sentence = currentDialogue.sentences[i];
+            Debug.Log(sentence.texts);
+            //dialogueBoxUI.SetText(sentence.texts);
+            dialogueBoxUI.ToggleText(true);
+            yield return StartCoroutine(TypeSentence(sentence.isPressButtonToClose ? sentence.texts + "\n\n(click to continue)" : sentence.texts));
+
+            if (sentence.isPressButtonToClose)
+            {
+                Debug.Log("waitig");
+                yield return new WaitUntil(()=> inputManager.confirmButton);
+            }
+            else
+            {
+                yield return new WaitForSeconds(sentence.duration);
+            }
         }
 
         EndDialogue();
@@ -62,14 +79,14 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
     public void EndDialogue()
     {
         Debug.Log("End of conversation.");
-        animator.SetBool("IsOpen", false);
+        dialogueBoxUI.ToggleDialogueBox(false);
         currentDialogue = null;
         canDialogue = true;
 
@@ -83,5 +100,8 @@ public class DialogueManager : MonoBehaviour
         StartDialogue(obj.dialogue);
     }
 
-
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }
