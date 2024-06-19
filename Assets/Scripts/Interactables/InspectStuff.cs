@@ -11,7 +11,7 @@ public class InspectStuff : MonoBehaviour
     [ContextMenu("CopyDialogueFromTrigger")]
     public void CopyDialogueFromTrigger()
     {
-        var trigger = GetComponentInChildren<DialogueTriggerON>();
+        var trigger = GetComponentInChildren<DialogueTrigger>();
         //dialogue = new Dialogue(trigger.dialogue);
     }
 }

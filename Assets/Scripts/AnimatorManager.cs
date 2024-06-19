@@ -9,15 +9,22 @@ public class AnimatorManager : MonoBehaviour
 
     int horizontal;
     int vertical;
+    bool isWalking;
 
     private void Awake()
     {
-        horizontal = Animator.StringToHash("Horizontal");
-        vertical = Animator.StringToHash("Vertical");
+        //horizontal = Animator.StringToHash("Horizontal");
+        //vertical = Animator.StringToHash("Vertical");
+        
     }
 
     public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement)
     {
+        
+        
+        //animator.SetBool("isWalking", true);
+
+        /*
         //Animation snapping
         float snappedHorizontal;
         float snappedVertical;
@@ -53,7 +60,7 @@ public class AnimatorManager : MonoBehaviour
         #endregion
 
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
-        animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
+        animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);*/
     }
 
 }

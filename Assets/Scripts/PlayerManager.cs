@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
     ExplorerCtrl explorerCtrl;
-
+    
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();

@@ -13,7 +13,18 @@ public class InputManager : MonoBehaviour
     public bool interactButton;
     public bool leftClickButton;
 
+    //AnimatorManager animatorManager;
+    //private float moveAmout;
+    [SerializeField]
+    Animator animator;
+    //bool isWalking;
 
+    private void Awake()
+    {
+        animator.SetBool("isWalking", false);
+
+        //animatorManager = GetComponent<AnimatorManager>();
+    }
 
     public void HandleAllInputs()
     {
@@ -29,5 +40,17 @@ public class InputManager : MonoBehaviour
         interactButton = Input.GetKeyDown(KeyCode.E);
         leftClickButton = Input.GetMouseButtonDown(0);
         confirmButton = jumpButton || interactButton || leftClickButton;
+
+        //moveAmout = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        //animatorManager.UpdateAnimatorValues(0, moveAmout);
+
+        if(directionalInput != new Vector2(0, 0) )
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 }

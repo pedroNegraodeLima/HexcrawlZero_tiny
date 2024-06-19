@@ -8,8 +8,18 @@ public class Door : MonoBehaviour, IInteractable
     public string InteractorPrompt => prompt;
     public bool Interact(PlayerPickUp interactor)
     {
-        Debug.Log("Opening Door");
-        return true;
+        var keyPossession = interactor.GetComponent<HasKey>();
+
+        if (keyPossession == null) return false;
+
+        if (keyPossession.hasKey)
+        {
+            Debug.Log("Opening Door");
+            return true;
+        }
+
+        Debug.Log("No key Found");
+        return false;
     }
 
 }

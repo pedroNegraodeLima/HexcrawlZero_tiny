@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerPickUp : MonoBehaviour
 {
+    InputManager inputManager;
+
     [SerializeField] private float pickupRange;
     [SerializeField] private Transform interactionPoint;
     [SerializeField] LayerMask pickupLayer;
@@ -14,21 +17,34 @@ public class PlayerPickUp : MonoBehaviour
     public static System.Action<InspectStuff> OnScanCollectible;
     public static System.Action<InspectStuff> OnPickUpCollectible;
 
-    bool tryPick;
+    private IInteractable interactable;
 
-    private void Start()
+    [SerializeField] private InteractionPromptUI interactionPromptUI;
+
+    private void Awake()
     {
-     
+        inputManager = GetComponent<InputManager>();
     }
     // Update is called once per frame
     private void Update()
     {
         numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, pickupRange, colliders, pickupLayer);
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (numFound > 0)
         {
-            Debug.Log("Apertou o Ezim");
-            tryPick = true;
+            interactable = colliders[0].GetComponent<IInteractable>();
+
+            if (interactable != null) 
+            {
+                if (!interactionPromptUI.isDisplayed) interactionPromptUI.SetUp(interactable.InteractorPrompt);
+
+                if (inputManager.confirmButton) interactable.Interact(this);
+            }
+            else
+            {
+                if(interactable != null) interactable = null;
+                if (interactionPromptUI.isDisplayed) interactionPromptUI.CloseUI();
+            }
         }
 
     }
@@ -39,35 +55,6 @@ public class PlayerPickUp : MonoBehaviour
         Gizmos.DrawWireSphere(interactionPoint.position, pickupRange);
     }
 
-    private void FixedUpdate()
-    {
-        if (numFound > 0)
-        {
-            var interactable = colliders[0].GetComponent<InspectStuff>();
-            if (interactable != null)
-                //Debug.Log("soltou rainho em: " + scanHit.transform.name);
-                OnScanCollectible?.Invoke(interactable);
-        }
-        else
-        {
-            OnScanCollectible?.Invoke(null);
-        }
-
-        if (tryPick)
-            TryPickUp();
-    }
-
-
-    private void TryPickUp()
-    {
-        if (numFound > 0)
-        {
-            var interactable = colliders[0].GetComponent<InspectStuff>();
-            if (interactable != null)
-                OnPickUpCollectible?.Invoke(interactable);
-                Debug.Log("TryPickUp rolou");
-        }
-        tryPick = false;
-    }
+    
 
 }
