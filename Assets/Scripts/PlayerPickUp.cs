@@ -40,11 +40,11 @@ public class PlayerPickUp : MonoBehaviour
 
                 if (inputManager.confirmButton) interactable.Interact(this);
             }
-            else
-            {
-                if(interactable != null) interactable = null;
-                if (interactionPromptUI.isDisplayed) interactionPromptUI.CloseUI();
-            }
+        }
+        else
+        {
+            if (interactable != null) interactable = null;
+            if (interactionPromptUI.isDisplayed) interactionPromptUI.CloseUI();
         }
 
     }

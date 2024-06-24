@@ -6,7 +6,9 @@ public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
     ExplorerCtrl explorerCtrl;
-    
+
+    private bool canMove = true;
+
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -20,6 +22,15 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        explorerCtrl.HandleAllMovement();
+        if (canMove)
+        {
+            explorerCtrl.HandleAllMovement();
+        }
+        
+    }
+
+    public void SetMovementEnabled(bool enabled)
+    {
+        canMove = enabled;
     }
 }

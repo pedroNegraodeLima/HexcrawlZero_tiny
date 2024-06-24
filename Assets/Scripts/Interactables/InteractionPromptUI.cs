@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class InteractionPromptUI : MonoBehaviour
 {
@@ -29,6 +27,7 @@ public class InteractionPromptUI : MonoBehaviour
     {
         proptText.text = displayText;
         uIPanel.SetActive(true);
+        isDisplayed = true;
     }
 
     public void CloseUI()

@@ -21201,6 +21201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83beeb2d0cff4b7469eacdc5bfbfe334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 60845187}
+  playerManager: {fileID: 0}
+  playerAnimator: {fileID: 0}
   prompt: press SPACE
   dialogue:
     sentences:
@@ -54511,6 +54514,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasKey: 0
+--- !u!114 &1032530132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8402888964504409820, guid: 0aef715a473248c4a864794d260d48f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8096922752879184955}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032530123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1c5e79ae4a1af43896ba82c862f53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1033303768 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1772561911378799375, guid: 4442e87e6e0b03c4d8226e625da14661,
@@ -54700,7 +54715,7 @@ GameObject:
   - component: {fileID: 1152260796}
   - component: {fileID: 1152260795}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Painelzinho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57467,6 +57482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83beeb2d0cff4b7469eacdc5bfbfe334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 60845187}
+  playerManager: {fileID: 1032530132}
+  playerAnimator: {fileID: 1863561390}
   prompt: press SPACE
   dialogue:
     sentences:

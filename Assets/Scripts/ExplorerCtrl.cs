@@ -20,7 +20,7 @@ public class ExplorerCtrl : MonoBehaviour
         cameraObject = Camera.main.transform;
         playerRB = GetComponent<Rigidbody>();
     }
-   
+  
     public void HandleAllMovement()
     {
         HandleMovement();
