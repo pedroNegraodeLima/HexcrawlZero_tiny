@@ -246,7 +246,6 @@ GameObject:
   - component: {fileID: 4417099061933488464}
   - component: {fileID: 4399492353135146442}
   - component: {fileID: 918464214255118760}
-  - component: {fileID: 7007732020487375459}
   - component: {fileID: 1647897205740577373}
   - component: {fileID: 8402888964504409820}
   m_Layer: 0
@@ -341,6 +340,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   numFound: 0
+  interactionPromptUI: {fileID: 0}
 --- !u!114 &918464214255118760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,19 +355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   rotationSpeed: 10
---- !u!114 &7007732020487375459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7282207003265098726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26626c3321a7ee44e9236dd68959234a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 2519523649268619191}
 --- !u!114 &1647897205740577373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +374,7 @@ MonoBehaviour:
   jumpButton: 0
   interactButton: 0
   leftClickButton: 0
+  animator: {fileID: 0}
 --- !u!114 &8402888964504409820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,12 +680,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &2519523649268619191 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 7b1eeee1b1b2db2498c8542f89c9782e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8331009228917090854}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8365165537812532685 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7b1eeee1b1b2db2498c8542f89c9782e,

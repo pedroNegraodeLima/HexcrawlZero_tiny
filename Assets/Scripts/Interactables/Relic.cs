@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class Relic : MonoBehaviour, IInteractable
 {
-    [SerializeField] cameraFollows cam;
     [SerializeField] PlayerManager playerManager;
     [SerializeField] Animator playerAnimator;
 
@@ -22,16 +21,15 @@ public class Relic : MonoBehaviour, IInteractable
     {
         Debug.Log("This is a Relic!");
 
-        if (ableToInteract) 
-        {            
+        if (ableToInteract)
+        {
             playerManager.SetMovementEnabled(false);
 
             playerAnimator.SetBool("isWalking", false);
             playerAnimator.SetBool("isKneeling", true);
 
-            cam.transform.DOMoveY(-5, 2);
-            cam.transform.DOMoveZ(5, 2);
-
+            CameraEffects.Zoom(1);
+            
             TriggerDialogue();
 
             ableToInteract = false;
@@ -41,13 +39,12 @@ public class Relic : MonoBehaviour, IInteractable
         {
             playerAnimator.SetBool("isKneeling", false);
             playerAnimator.SetBool("isGettingUp", true);
-            playerManager.SetMovementEnabled(true);
 
-            cam.transform.DORewind();
+            StartCoroutine(WaitForAnimationFinished());
 
             ableToInteract = true;
         }
-        
+
         return true;
     }
 
@@ -58,6 +55,14 @@ public class Relic : MonoBehaviour, IInteractable
         if (!dialogueManager.canDialogue) return;
 
         dialogueManager.StartDialogue(dialogue);
-        
+
     }
+
+    public IEnumerator WaitForAnimationFinished()
+    {
+        yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Explorer_RIG_idle"); });
+
+        playerManager.SetMovementEnabled(true);
+    }
+
 }
