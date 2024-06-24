@@ -28,6 +28,8 @@ public class PlayerPickUp : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!DialogueManager.Get().canDialogue) return;
+
         numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, pickupRange, colliders, pickupLayer);
 
         if (numFound > 0)
