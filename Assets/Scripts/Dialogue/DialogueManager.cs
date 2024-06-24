@@ -8,7 +8,8 @@ using System;
 public class DialogueManager : MonoBehaviour
 {
     private static DialogueManager instance;
-    public static event System.Action OnDialogueFinish;
+    public static event System.Action<Dialogue> OnDialogueStart;
+    public static event System.Action<Dialogue> OnDialogueFinish;
 
     public Text nameText;
     public TMP_Text dialogueText;
@@ -44,6 +45,7 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         dialogueBoxUI.ToggleDialogueBox(true);
 
+        OnDialogueStart?.Invoke(dialogue);
         StartCoroutine( DisplayNextSentence());
     }
 
@@ -87,10 +89,10 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("End of conversation.");
         dialogueBoxUI.ToggleDialogueBox(false);
+        OnDialogueFinish?.Invoke(currentDialogue);
         currentDialogue = null;
         canDialogue = true;
 
-        OnDialogueFinish?.Invoke();
     }
 
 

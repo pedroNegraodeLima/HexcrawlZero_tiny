@@ -28,7 +28,7 @@ public class Relic : MonoBehaviour, IInteractable
             playerAnimator.SetBool("isWalking", false);
             playerAnimator.SetBool("isKneeling", true);
 
-            CameraEffects.Zoom(1);
+            CameraEffects.ToggleZoom(true, 1);
             
             TriggerDialogue();
 
@@ -61,6 +61,8 @@ public class Relic : MonoBehaviour, IInteractable
     public IEnumerator WaitForAnimationFinished()
     {
         yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Explorer_RIG_idle"); });
+
+        CameraEffects.ToggleZoom(false, 1);
 
         playerManager.SetMovementEnabled(true);
     }

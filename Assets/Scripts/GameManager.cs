@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
             hasCollectAll = true;
         }
     }
-    public void AllCollectedSpeech()
+    public void AllCollectedSpeech(Dialogue d)
     {
         if (hasCollectAll)
         {
