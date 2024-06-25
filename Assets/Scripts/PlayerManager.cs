@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour
 
     private bool canMove = true;
 
+    public bool keyPossession = false;
+
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -32,5 +34,10 @@ public class PlayerManager : MonoBehaviour
     public void SetMovementEnabled(bool enabled)
     {
         canMove = enabled;
+    }
+
+    public void HasKey(bool enabled)
+    {
+        keyPossession = true;
     }
 }

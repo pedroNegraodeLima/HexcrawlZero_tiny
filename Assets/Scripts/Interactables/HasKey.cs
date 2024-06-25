@@ -10,11 +10,11 @@ public class HasKey : MonoBehaviour
 
     private void Awake()
     {
-        inputManager = GetComponent<InputManager>();
+       // inputManager = GetComponent<InputManager>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) != true) hasKey = !hasKey; //isso é um cheat pra pegar a chave apertando o 'P'. A forma correta de pegá-la tem de ser implementada.
+        //if (Input.GetKeyDown(KeyCode.M) != true) hasKey = !hasKey; //isso é um cheat pra pegar a chave apertando o 'P'. A forma correta de pegá-la tem de ser implementada.
 
     }
 }

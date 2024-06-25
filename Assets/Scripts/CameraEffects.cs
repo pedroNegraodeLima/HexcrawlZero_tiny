@@ -13,6 +13,10 @@ public class CameraEffects : MonoBehaviour
 
     public bool isZoomIn;
 
+    public Vector3 defaultRotation;
+    public Vector3 rotatedPos;
+
+    public bool isRotated;
     private void Awake() => Instance = this;
 
     private void OnShake(float duration, float strenght, System.Action callback = null)
@@ -32,7 +36,18 @@ public class CameraEffects : MonoBehaviour
 
     }
 
+    private void OnRotation(bool rotated, float duration, System.Action callback)
+    {
+        if (isRotated == rotated) return;
+
+        isRotated = rotated;
+        transform.DOLocalRotate(isRotated ? rotatedPos : defaultRotation, duration).OnComplete(() => callback?.Invoke());
+
+    }
+
     public static void Shake(float duration, float strenght, System.Action callback = null) => Instance.OnShake(duration, strenght, callback);
 
     public static void ToggleZoom(bool zoomIn, float duration, System.Action callback = null) => Instance.OnZoom(zoomIn, duration, callback);
+
+    public static void DoRotation(bool rotated, float duration ,System.Action callback = null) => Instance.OnRotation(rotated, duration, callback);
 }
