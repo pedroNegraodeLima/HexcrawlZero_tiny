@@ -45,8 +45,6 @@ public class AquireKey : MonoBehaviour, IInteractable
             
             TriggerDialogue();
 
-            ableToInteract = false;
-
             playerManager.HasKey(true);
            
             animator.Play("Base Layer.SphereAction");
@@ -54,11 +52,11 @@ public class AquireKey : MonoBehaviour, IInteractable
             sphereMaterials[1].DOColor(Color.cyan, "Emission Map", 1);
             sphereMaterials[1].DOColor(Color.cyan, "Base Map", 1);
 
-
+            ableToInteract = false;
         }
         else
         {
-           
+            Debug.Log("I have arrived!");
             StartCoroutine(WaitForAnimationFinished());
 
             ableToInteract = true;
