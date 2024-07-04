@@ -27,7 +27,7 @@ public class AquireKey : MonoBehaviour, IInteractable
         {
             var selectionRenderer = _selection.GetComponentInChildren<Renderer>();
             sphereMaterials = selectionRenderer.materials;
-           
+            Debug.Log("sphere material name is:" + sphereMaterials);
         }
     }
 
