@@ -10,7 +10,6 @@ public class DialogueTrigger : MonoBehaviour
 
     private bool isInsideRange;
 
-
     private InputManager inputManager;
 
     public enum TriggerType
