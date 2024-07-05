@@ -19,7 +19,7 @@ public class JumpCtrl : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
-        originalDrag = playerRB.drag; // Store the original drag value
+        //originalDrag = playerRB.drag; // Store the original drag value
     }
 
     private void Update()
@@ -34,17 +34,17 @@ public class JumpCtrl : MonoBehaviour
         if (isGrounded && inputManager.testJumpButton)
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            playerRB.drag = originalDrag; // Reset drag when jumping
+            //playerRB.drag = originalDrag; // Reset drag when jumping
         }
 
         // Apply additional drag when falling
-        if (playerRB.velocity.y < 0)
-        {
-            playerRB.drag = fallDrag;
-        }
-        else
-        {
-            playerRB.drag = originalDrag; // Reset drag when not falling
-        }
+        //if (playerRB.velocity.y < 0)
+        //{
+        //    playerRB.drag = fallDrag;
+        //}
+        //else
+        //{
+        //    playerRB.drag = originalDrag; // Reset drag when not falling
+        //}
     }
 }

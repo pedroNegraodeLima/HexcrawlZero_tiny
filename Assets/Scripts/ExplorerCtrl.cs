@@ -35,7 +35,7 @@ public class ExplorerCtrl : MonoBehaviour
         moveDirection = moveDirection * movementSpeed;
 
         Vector3 movementVelocity = moveDirection;
-        playerRB.velocity = movementVelocity;
+        playerRB.velocity = new Vector3(movementVelocity.x,playerRB.velocity.y, movementVelocity.z);
     }
 
     private void HandleRotation()

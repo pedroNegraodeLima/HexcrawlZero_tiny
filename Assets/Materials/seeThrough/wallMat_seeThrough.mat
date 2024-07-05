@@ -141,7 +141,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SHADOWS_SOFT: 0
-    - _Size: 0
+    - _Size: 1
     - _Smoothness: 0.867
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -157,5 +157,5 @@ Material:
     - _Color: {r: 0.4745098, g: 0.27058825, b: 0.2901961, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _pPosition: {r: 0.5, g: 0.55585283, b: 17.990381, a: 0}
+    - _pPosition: {r: 0.5, g: 0.5558533, b: 8.99519, a: 0}
   m_BuildTextureStacks: []

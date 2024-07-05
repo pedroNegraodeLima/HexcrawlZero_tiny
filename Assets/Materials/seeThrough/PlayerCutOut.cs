@@ -14,6 +14,8 @@ public class PlayerCutOut : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
+        wallMaterial.SetVector(PosID, new Vector2(0.5f,0.5f));
+        wallMaterial.SetFloat(SizeID, 0);
     }
     void Update()
     {
@@ -29,7 +31,14 @@ public class PlayerCutOut : MonoBehaviour
             wallMaterial.SetFloat(SizeID, 0);
         }
 
-        var view = cam.WorldToViewportPoint(transform.position);
-        wallMaterial.SetVector(PosID, view);
+        //var view = cam.WorldToViewportPoint(transform.position);
+        //wallMaterial.SetVector(PosID, view);
+    }
+
+    private void OnDestroy()
+    {
+        //var view = cam.WorldToViewportPoint(transform.position);
+        wallMaterial.SetFloat(SizeID, 0);
+        //wallMaterial.SetVector(PosID, view);
     }
 }
