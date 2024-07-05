@@ -8,8 +8,8 @@ using System;
 public class DialogueManager : MonoBehaviour
 {
     private static DialogueManager instance;
-    public static event System.Action<Dialogue> OnDialogueStart;
-    public static event System.Action<Dialogue> OnDialogueFinish;
+    public static System.Action<Dialogue> OnDialogueStart;
+    public static System.Action<Dialogue> OnDialogueFinish;
 
     public Text nameText;
     public TMP_Text dialogueText;

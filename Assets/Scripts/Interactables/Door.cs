@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class Door : MonoBehaviour, IInteractable
 {
@@ -14,6 +16,8 @@ public class Door : MonoBehaviour, IInteractable
     public Dialogue dialogue;
 
     bool ableToInteract = true;
+
+    public UnityEvent OnDoorOpen;
 
     private void Start()
     {
@@ -34,14 +38,11 @@ public class Door : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerPickUp interactor)
     {
-        var keyPossession = interactor.GetComponent<HasKey>();
 
-        if (keyPossession == null) return false;
-
-        if (keyPossession.hasKey)
+        if (playerManager.keyPossession)
         {
             Debug.Log("Opening Door");
-
+            OnDoorOpen?.Invoke();
             if (ableToInteract)
             {
                 ableToInteract = false;

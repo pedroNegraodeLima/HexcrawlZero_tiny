@@ -32,12 +32,16 @@ public class FadeOnContact : MonoBehaviour
     public bool Interact(PlayerPickUp interactor)
     {
         if (hasInteracted) return false;
+        Fade();
+        return true;
+    }
 
+    public void Fade()
+    {
         hasInteracted = true;
         Debug.Log("You found a secrete room!");
         mat.DOFade(0, 1);
         aSource.PlayOneShot(aSource.clip, volume);
-        return true;
     }
 
     private void OnDestroy()

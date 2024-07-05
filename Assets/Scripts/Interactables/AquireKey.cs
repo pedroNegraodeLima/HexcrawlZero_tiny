@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class AquireKey : MonoBehaviour, IInteractable
 {
@@ -10,12 +11,15 @@ public class AquireKey : MonoBehaviour, IInteractable
     Animator animator;
 
     Renderer _selection;
-    Material[] sphereMaterials;
+    [SerializeField] Material sphereMaterials;
 
     [SerializeField] private string prompt;
     public string InteractorPrompt => prompt;
 
     public Dialogue dialogue;
+
+    public Color baseColor;
+    public Color32 emissiveColor;
 
     bool ableToInteract = true;
 
@@ -23,17 +27,14 @@ public class AquireKey : MonoBehaviour, IInteractable
     {
         animator = GetComponentInChildren<Animator>();
 
-        if (_selection != null)
-        {
-            var selectionRenderer = _selection.GetComponentInChildren<Renderer>();
-            sphereMaterials = selectionRenderer.materials;
-            Debug.Log("sphere material name is:" + sphereMaterials[1]);
-            Debug.Log(selectionRenderer);
-        }
-        else
-        {
-            Debug.Log("Não encontrou o renderer");
-        }
+        sphereMaterials.SetColor("_BaseColor", baseColor);
+        sphereMaterials.SetColor("_EmissionColor", emissiveColor);
+    }
+
+    public void Finish()
+    {
+        CameraEffects.ToggleZoom(false, 1);
+        playerManager.SetMovementEnabled(true);
     }
 
     public bool Interact(PlayerPickUp interactor)
@@ -54,18 +55,13 @@ public class AquireKey : MonoBehaviour, IInteractable
            
             animator.Play("Base Layer.SphereAction");
 
-            sphereMaterials[1].DOColor(Color.cyan, "Emission Map", 1);
-            sphereMaterials[1].DOColor(Color.cyan, "Base Map", 1);
+            sphereMaterials.DOColor(Color.cyan, "_EmissionColor", 3);
+            sphereMaterials.DOColor(Color.cyan, "_BaseColor", 3);
 
             ableToInteract = false;
-        }
-        else
-        {
-            Debug.Log("I have arrived!");
-            StartCoroutine(WaitForAnimationFinished());
 
-            ableToInteract = true;
         }
+      
 
         return true;
     }
@@ -87,6 +83,12 @@ public class AquireKey : MonoBehaviour, IInteractable
         CameraEffects.ToggleZoom(false, 1);
 
         playerManager.SetMovementEnabled(true);
+    }
+
+    private void OnDestroy()
+    {
+        sphereMaterials.SetColor("_BaseColor", baseColor);
+        sphereMaterials.SetColor("_EmissionColor", emissiveColor);
     }
 
 }
