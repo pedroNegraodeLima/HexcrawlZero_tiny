@@ -27,13 +27,18 @@ public class AquireKey : MonoBehaviour, IInteractable
         {
             var selectionRenderer = _selection.GetComponentInChildren<Renderer>();
             sphereMaterials = selectionRenderer.materials;
-            Debug.Log("sphere material name is:" + sphereMaterials);
+            Debug.Log("sphere material name is:" + sphereMaterials[1]);
+            Debug.Log(selectionRenderer);
+        }
+        else
+        {
+            Debug.Log("Não encontrou o renderer");
         }
     }
 
     public bool Interact(PlayerPickUp interactor)
     {
-        Debug.Log("This is a Relic!");
+        Debug.Log("This is hwo to aquire the key!");
 
         if (ableToInteract)
         {
