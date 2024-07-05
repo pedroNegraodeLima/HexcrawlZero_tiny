@@ -31,7 +31,7 @@ public class JumpCtrl : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
-        if (isGrounded && inputManager.jumpButton)
+        if (isGrounded && inputManager.testJumpButton)
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             playerRB.drag = originalDrag; // Reset drag when jumping
