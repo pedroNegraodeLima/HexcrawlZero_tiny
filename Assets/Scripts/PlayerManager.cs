@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     ExplorerCtrl explorerCtrl;
 
     private bool canMove = true;
+   
 
     public bool keyPossession = false;
 
@@ -20,6 +21,8 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         inputManager.HandleAllInputs();
+
+        
     }
 
     private void FixedUpdate()
@@ -28,7 +31,9 @@ public class PlayerManager : MonoBehaviour
         {
             explorerCtrl.HandleAllMovement();
         }
+
         
+
     }
 
     public void SetMovementEnabled(bool enabled)
@@ -40,4 +45,6 @@ public class PlayerManager : MonoBehaviour
     {
         keyPossession = true;
     }
+
+   
 }
