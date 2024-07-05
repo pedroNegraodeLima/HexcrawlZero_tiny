@@ -6,7 +6,7 @@ using DG.Tweening;
 public class Relic : MonoBehaviour, IInteractable
 {
     [SerializeField] PlayerManager playerManager;
-    [SerializeField] Animator playerAnimator;
+    Animator playerAnimator;
 
 
     [SerializeField] private string prompt;
@@ -16,7 +16,12 @@ public class Relic : MonoBehaviour, IInteractable
 
     bool ableToInteract = true;
 
+    private void Awake()
+    {
+        GameObject playerChar = GameObject.Find("char_newAttempt");
 
+        playerAnimator = playerChar.GetComponent<Animator>();
+    }
     public bool Interact(PlayerPickUp interactor)
     {
         Debug.Log("This is a Relic!");
@@ -65,6 +70,8 @@ public class Relic : MonoBehaviour, IInteractable
         CameraEffects.ToggleZoom(false, 1);
 
         playerManager.SetMovementEnabled(true);
+
+        playerAnimator.SetBool("isGettingUp", false);
     }
 
 }
