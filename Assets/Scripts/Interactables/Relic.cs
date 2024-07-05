@@ -16,6 +16,7 @@ public class Relic : MonoBehaviour, IInteractable
 
     bool ableToInteract = true;
 
+
     private void Awake()
     {
         GameObject playerChar = GameObject.Find("char_newAttempt");
@@ -38,7 +39,7 @@ public class Relic : MonoBehaviour, IInteractable
             TriggerDialogue();
 
             ableToInteract = false;
-
+            GameManager.inspectedRelicCount++;
         }
         else
         {
@@ -73,5 +74,7 @@ public class Relic : MonoBehaviour, IInteractable
 
         playerAnimator.SetBool("isGettingUp", false);
     }
+
+  
 
 }
