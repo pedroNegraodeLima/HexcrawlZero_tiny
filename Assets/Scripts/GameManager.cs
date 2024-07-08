@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     public void ExitDungeon()
     {
         backdrop.DOFade(1,3f).OnComplete(()=>{
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         });
     }
 }
