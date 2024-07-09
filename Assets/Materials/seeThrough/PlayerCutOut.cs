@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerCutOut : MonoBehaviour
 {
     [SerializeField] Material wallMaterial;
+    [SerializeField] Material blackMaterial;
+    [SerializeField] Material caveMaterial;
     [SerializeField] LayerMask mask;
     Camera cam;
 
@@ -14,7 +16,7 @@ public class PlayerCutOut : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
-        wallMaterial.SetVector(PosID, new Vector2(0.5f,0.5f));
+        wallMaterial.SetVector(PosID, new Vector2(0.5f,0.55f));
         wallMaterial.SetFloat(SizeID, 0);
     }
     void Update()
@@ -25,10 +27,14 @@ public class PlayerCutOut : MonoBehaviour
         if(Physics.Raycast(ray, 3000, mask))
         {
             wallMaterial.SetFloat(SizeID, 1);
+            blackMaterial.SetFloat(SizeID, 1);
+            caveMaterial.SetFloat(SizeID, 1);
         }
         else
         {
             wallMaterial.SetFloat(SizeID, 0);
+            blackMaterial.SetFloat(SizeID, 0);
+            caveMaterial.SetFloat(SizeID, 0);
         }
 
         //var view = cam.WorldToViewportPoint(transform.position);
