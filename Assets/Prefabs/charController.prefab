@@ -365,6 +365,7 @@ MonoBehaviour:
   jumpButton: 0
   interactButton: 0
   leftClickButton: 0
+  testJumpButton: 0
   animator: {fileID: 0}
 --- !u!114 &2876780495600488193
 MonoBehaviour:
@@ -2496,6 +2497,7 @@ Transform:
   - {fileID: 1379589424360036681}
   - {fileID: 7169125305293542547}
   - {fileID: 7351451005716221547}
+  - {fileID: 8521194425615212296}
   m_Father: {fileID: 7089016315675894218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6524411990928189732
@@ -2955,7 +2957,6 @@ Transform:
   m_Children:
   - {fileID: 5803017791838658275}
   - {fileID: 1346078328138374196}
-  - {fileID: 8521194425615212296}
   - {fileID: 4394644031651716405}
   - {fileID: 8338596294148211907}
   m_Father: {fileID: 6200009130440236365}
@@ -3688,13 +3689,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8588362562492922997}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6681768, y: -0.07438382, z: 0.082109116, w: 0.73570716}
-  m_LocalPosition: {x: 0, y: -0.063979626, z: -0.086833954}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: 0.047751278, y: -0.110657215, z: 0.005462602, w: 0.99269587}
+  m_LocalPosition: {x: 0, y: 0.0008683014, z: -0.0006397961}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1369849650489152992}
-  m_Father: {fileID: 7089016315675894218}
+  m_Father: {fileID: 4394644031651716405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7691883557243311973
 MeshFilter:
