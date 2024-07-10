@@ -58,9 +58,15 @@ Material:
     - _Edge_Falloff: 1.1
     - _Noise_Speed: 0.01
     - _Opacity: 0.42
+    - _Pulse_Effect: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Use_Dust_Effect: 0
+    - _Use_Glow: 0
+    - _glowRate: 4.17
+    - _glowSize: 5
+    - _glow_Speed: 4.5
+    - _vectorCtrl: 0.55
     m_Colors:
-    - _Color: {r: 0.990566, g: 0.7647402, b: 0.5186454, a: 0}
+    - _Color: {r: 1, g: 0.81100893, b: 0.7122642, a: 0}
   m_BuildTextureStacks: []
