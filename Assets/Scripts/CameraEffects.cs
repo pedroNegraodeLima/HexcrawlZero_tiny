@@ -17,6 +17,11 @@ public class CameraEffects : MonoBehaviour
     public Vector3 rotatedPos;
 
     public bool isRotated;
+
+    public Vector3 zoomInOnRotation;
+
+    
+
     private void Awake() => Instance = this;
 
     private void OnShake(float duration, float strenght, System.Action callback = null)
@@ -42,6 +47,7 @@ public class CameraEffects : MonoBehaviour
 
         isRotated = rotated;
         transform.DOLocalRotate(isRotated ? rotatedPos : defaultRotation, duration).OnComplete(() => callback?.Invoke());
+        transform.DOLocalMove(isRotated ? zoomInOnRotation : defaultOffset, duration).SetEase(Ease.OutCubic).OnComplete(() => callback?.Invoke());
 
     }
 

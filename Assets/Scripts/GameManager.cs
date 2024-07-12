@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Force Collect All");
             inspectedRelicCount = totalRelics;
         } //só serve pra dar debug na quantidade dew coletáveis 
+
+        ExitAnytime();
     }
 
     void OnDisable()
@@ -57,8 +59,18 @@ public class GameManager : MonoBehaviour
     public void ExitDungeon()
     {
         backdrop.DOFade(1,3f).OnComplete(()=>{
-            SceneManager.LoadScene(2    );
+            SceneManager.LoadScene(2);
         });
+    }
+
+
+    public void ExitAnytime()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        
     }
 }
 

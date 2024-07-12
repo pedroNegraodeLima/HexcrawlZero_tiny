@@ -59,7 +59,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log(sentence.texts);
             //dialogueBoxUI.SetText(sentence.texts);
             dialogueBoxUI.ToggleText(true);
-            yield return StartCoroutine(TypeSentence(sentence.isPressButtonToClose ? sentence.texts + "\n\n(click to continue)" : sentence.texts));
+            yield return StartCoroutine(TypeSentence(sentence.isPressButtonToClose ? sentence.texts + "\n(click to continue)" : sentence.texts));
 
             if (sentence.isPressButtonToClose)
             {
