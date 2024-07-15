@@ -39,8 +39,9 @@ public class Relic : MonoBehaviour, IInteractable
             
             TriggerDialogue();
 
-            ableToInteract = false;
             GameManager.inspectedRelicCount++;
+
+            ableToInteract = false;
         }
         else
         {

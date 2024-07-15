@@ -81,5 +81,7 @@ public class BotArmRelic : MonoBehaviour, IInteractable
         playerAnimator.SetBool("isGettingUp", false);
 
         gameObject.layer = LayerNonInteractable;
+
+        baterry.layer = LayerMask.NameToLayer("Player");
     }
 }

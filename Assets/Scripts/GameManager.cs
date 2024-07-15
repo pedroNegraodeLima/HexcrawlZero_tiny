@@ -40,8 +40,6 @@ public class GameManager : MonoBehaviour
             inspectedRelicCount = totalRelics;
         } //só serve pra dar debug na quantidade dew coletáveis 
 
-        ExitAnytime();
-
         ExitMenu();
     }
 
