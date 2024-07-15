@@ -14,9 +14,13 @@ public class GameManager : MonoBehaviour
 
     public Image backdrop;
 
+    public GameObject quitMenu;
+
     // Start is called before the first frame update
     void Start()
     {
+        quitMenu.SetActive(false);
+
         inspectedRelicCount = 0;
 
         DialogueManager.OnDialogueFinish += AllCollectedSpeech;
@@ -37,6 +41,8 @@ public class GameManager : MonoBehaviour
         } //só serve pra dar debug na quantidade dew coletáveis 
 
         ExitAnytime();
+
+        ExitMenu();
     }
 
     void OnDisable()
@@ -64,12 +70,18 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ExitAnytime()
+    public void ExitMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            quitMenu.SetActive(true);
         }
+        
+    }
+
+    public void ExitAnytime()
+    {
+        Application.Quit();
         
     }
 }

@@ -55,6 +55,8 @@ public class Door : MonoBehaviour, IInteractable
                 });
                 CameraEffects.DoRotation(true, 1);
 
+                int LayerNonInteractable = LayerMask.NameToLayer("GROUND");
+                gameObject.layer = LayerNonInteractable;
             }
             return true;
         }

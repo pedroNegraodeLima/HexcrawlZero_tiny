@@ -17,12 +17,12 @@ public class BotArmRelic : MonoBehaviour, IInteractable
 
     bool ableToInteract = true;
 
-
     private void Awake()
     {
         GameObject playerChar = GameObject.Find("char_newAttempt");
 
         playerAnimator = playerChar.GetComponent<Animator>();
+
     }
     public bool Interact(PlayerPickUp interactor)
     {
@@ -67,6 +67,8 @@ public class BotArmRelic : MonoBehaviour, IInteractable
 
     public IEnumerator WaitForAnimationFinished()
     {
+        int LayerNonInteractable = LayerMask.NameToLayer("GROUND");
+
         yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Explorer_RIG_idle"); });
 
         CameraEffects.ToggleZoom(false, 1);
@@ -77,5 +79,7 @@ public class BotArmRelic : MonoBehaviour, IInteractable
         baterry.transform.SetLocalPositionAndRotation(new Vector3 (0, 0.00183f, -0.0031f), Quaternion.Euler( 7, 0, 0));
 
         playerAnimator.SetBool("isGettingUp", false);
+
+        gameObject.layer = LayerNonInteractable;
     }
 }

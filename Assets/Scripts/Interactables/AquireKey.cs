@@ -29,6 +29,7 @@ public class AquireKey : MonoBehaviour, IInteractable
 
         sphereMaterials.SetColor("_BaseColor", baseColor);
         sphereMaterials.SetColor("_EmissionColor", emissiveColor);
+
     }
 
     public void Finish()
@@ -80,11 +81,15 @@ public class AquireKey : MonoBehaviour, IInteractable
 
     public IEnumerator WaitForAnimationFinished()
     {
+        int LayerNonInteractable = LayerMask.NameToLayer("GROUND");
+
         yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.SphereAction"); });
 
         CameraEffects.ToggleZoom(false, 1);
 
         playerManager.SetMovementEnabled(true);
+
+        gameObject.layer = LayerNonInteractable;
     }
 
     private void OnDestroy()
