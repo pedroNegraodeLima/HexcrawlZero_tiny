@@ -22,7 +22,17 @@ public class PlayerManager : MonoBehaviour
     {
         inputManager.HandleAllInputs();
 
-        
+#if UNITY_EDITOR
+        DebugCommands();
+#endif
+    }
+
+    private void DebugCommands()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Time.timeScale = Time.timeScale == 1 ? 3 : 1;
+        }
     }
 
     private void FixedUpdate()
