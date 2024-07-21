@@ -28,7 +28,7 @@ public class PlayerPickUp : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!DialogueManager.Get().canDialogue) return;
+        if (!DialogueManager.Get().canDialogue || DialogueManager.Get().HasDialogue) return;
 
         numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, pickupRange, colliders, pickupLayer);
 
@@ -36,11 +36,14 @@ public class PlayerPickUp : MonoBehaviour
         {
             interactable = colliders[0].GetComponent<IInteractable>();
 
-            if (interactable != null) 
+            if (interactable != null && interactable.CanInteract) 
             {
                 if (!interactionPromptUI.isDisplayed) interactionPromptUI.SetUp(interactable.InteractorPrompt);
 
-                if (inputManager.confirmButton) interactable.Interact(this);
+                if (inputManager.confirmButton) {
+                    interactable.Interact(this);
+                    Debug.Log("Try Interact " + colliders[0].gameObject.name);
+                };
             }
         }
         else

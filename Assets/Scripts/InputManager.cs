@@ -48,13 +48,6 @@ public class InputManager : MonoBehaviour
         //moveAmout = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
         //animatorManager.UpdateAnimatorValues(0, moveAmout);
 
-        if (directionalInput != new Vector2(0, 0) )
-        {
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
+        
     }
 }

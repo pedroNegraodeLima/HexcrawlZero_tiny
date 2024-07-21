@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
     ExplorerCtrl explorerCtrl;
+    public Animator animator;
 
     private bool canMove = true;
    
@@ -16,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     {
         inputManager = GetComponent<InputManager>();
         explorerCtrl = GetComponent<ExplorerCtrl>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -40,6 +42,18 @@ public class PlayerManager : MonoBehaviour
         if (canMove)
         {
             explorerCtrl.HandleAllMovement();
+            if (inputManager.directionalInput != new Vector2(0, 0))
+            {
+                animator.SetBool("isWalking", true);
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+            }
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
 
         
@@ -48,7 +62,9 @@ public class PlayerManager : MonoBehaviour
 
     public void SetMovementEnabled(bool enabled)
     {
+        Debug.Log("SetMovementEnabled " + enabled);
         canMove = enabled;
+        if(enabled==false) animator.SetBool("isWalking", false);
     }
 
     public void HasKey(bool enabled)

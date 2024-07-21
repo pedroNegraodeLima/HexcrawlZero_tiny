@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BotArmRelic : MonoBehaviour, IInteractable
 {
@@ -13,6 +14,8 @@ public class BotArmRelic : MonoBehaviour, IInteractable
     [SerializeField] private string prompt;
     public string InteractorPrompt => prompt;
 
+    public bool CanInteract => ableToInteract;
+
     public Dialogue dialogue;
 
     bool ableToInteract = true;
@@ -22,6 +25,7 @@ public class BotArmRelic : MonoBehaviour, IInteractable
         GameObject playerChar = GameObject.Find("char_newAttempt");
 
         playerAnimator = playerChar.GetComponent<Animator>();
+        DialogueManager.OnDialogueFinish += (d) => EndInteraction(d);
 
     }
     public bool Interact(PlayerPickUp interactor)
@@ -31,9 +35,7 @@ public class BotArmRelic : MonoBehaviour, IInteractable
         if (ableToInteract)
         {
             playerManager.SetMovementEnabled(false);
-
-            playerAnimator.SetBool("isWalking", false);
-            playerAnimator.SetBool("isKneeling", true);
+            playerAnimator.SetTrigger("Kneel");
 
             CameraEffects.ToggleZoom(true, 1);
 
@@ -44,12 +46,11 @@ public class BotArmRelic : MonoBehaviour, IInteractable
         }
         else
         {
-            playerAnimator.SetBool("isKneeling", false);
-            playerAnimator.SetBool("isGettingUp", true);
+            //playerAnimator.SetTrigger("StandUp");
 
-            StartCoroutine(WaitForAnimationFinished());
+            //StartCoroutine(WaitForAnimationFinished());
 
-            ableToInteract = true;
+            //ableToInteract = true;
         }
 
         return true;
@@ -65,23 +66,42 @@ public class BotArmRelic : MonoBehaviour, IInteractable
 
     }
 
-    public IEnumerator WaitForAnimationFinished()
+    private void EndInteraction(Dialogue d)
     {
-        int LayerNonInteractable = LayerMask.NameToLayer("GROUND");
-
-        yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Explorer_RIG_idle"); });
-
-        CameraEffects.ToggleZoom(false, 1);
-
-        playerManager.SetMovementEnabled(true);
-
+        if (d != dialogue) return;
+        Debug.Log("EndInteraction");
         baterry.transform.parent = torsoBone.transform;
-        baterry.transform.SetLocalPositionAndRotation(new Vector3 (0, 0.00183f, -0.0031f), Quaternion.Euler( 7, 0, 0));
-
-        playerAnimator.SetBool("isGettingUp", false);
-
-        gameObject.layer = LayerNonInteractable;
+        baterry.transform.SetLocalPositionAndRotation(new Vector3(0, 0.00183f, -0.0031f), Quaternion.Euler(7, 0, 0));
 
         baterry.layer = LayerMask.NameToLayer("Player");
+        DOVirtual.DelayedCall(1,() => 
+        {
+            playerAnimator.SetTrigger("StandUp");
+            CameraEffects.ToggleZoom(false, 1);
+            DOVirtual.DelayedCall(1, () => 
+            {
+                playerManager.SetMovementEnabled(true);
+            });
+        });
     }
+
+    //public IEnumerator WaitForAnimationFinished()
+    //{
+    //    int LayerNonInteractable = LayerMask.NameToLayer("GROUND");
+
+    //    yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Explorer_RIG_idle"); });
+
+    //    CameraEffects.ToggleZoom(false, 1);
+
+    //    playerManager.SetMovementEnabled(true);
+
+    //    baterry.transform.parent = torsoBone.transform;
+    //    baterry.transform.SetLocalPositionAndRotation(new Vector3 (0, 0.00183f, -0.0031f), Quaternion.Euler( 7, 0, 0));
+
+    //    playerAnimator.SetTrigger("Kneel");
+
+    //    gameObject.layer = LayerNonInteractable;
+
+    //    baterry.layer = LayerMask.NameToLayer("Player");
+    //}
 }

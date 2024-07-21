@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour
 
     private InputManager inputManager;
 
+    public bool HasDialogue => instance.currentDialogue != null;
+
     public static DialogueManager Get()
     {
         return instance;
@@ -92,7 +94,6 @@ public class DialogueManager : MonoBehaviour
         OnDialogueFinish?.Invoke(currentDialogue);
         currentDialogue = null;
         canDialogue = true;
-
     }
 
 

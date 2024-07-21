@@ -16,12 +16,15 @@ public class AquireKey : MonoBehaviour, IInteractable
     [SerializeField] private string prompt;
     public string InteractorPrompt => prompt;
 
+    public bool CanInteract => ableToInteract;
+
     public Dialogue dialogue;
 
     public Color baseColor;
     public Color32 emissiveColor;
 
     bool ableToInteract = true;
+    bool animationEnded = false;
 
     private void Awake()
     {
@@ -30,12 +33,12 @@ public class AquireKey : MonoBehaviour, IInteractable
         sphereMaterials.SetColor("_BaseColor", baseColor);
         sphereMaterials.SetColor("_EmissionColor", emissiveColor);
 
+        DialogueManager.OnDialogueFinish += (d) => EndInteraction(d);
     }
 
     public void Finish()
     {
-        CameraEffects.ToggleZoom(false, 1);
-        playerManager.SetMovementEnabled(true);
+        animationEnded = true;
     }
 
     public bool Interact(PlayerPickUp interactor)
@@ -44,10 +47,10 @@ public class AquireKey : MonoBehaviour, IInteractable
 
         if (ableToInteract)
         {
+            ableToInteract = false;
             playerManager.SetMovementEnabled(false);
+            playerAnimator.SetTrigger("Kneel");
 
-            playerAnimator.SetBool("isWalking", false);
-            
             CameraEffects.ToggleZoom(true, 1);
             
             TriggerDialogue();
@@ -59,7 +62,6 @@ public class AquireKey : MonoBehaviour, IInteractable
             sphereMaterials.DOColor(Color.cyan, "_EmissionColor", 3);
             sphereMaterials.DOColor(Color.cyan, "_BaseColor", 3);
 
-            ableToInteract = false;
 
             GameManager.inspectedRelicCount++;
 
@@ -79,18 +81,40 @@ public class AquireKey : MonoBehaviour, IInteractable
 
     }
 
-    public IEnumerator WaitForAnimationFinished()
+    private void EndInteraction(Dialogue d)
     {
-        int LayerNonInteractable = LayerMask.NameToLayer("GROUND");
+        if (d != dialogue) return;
 
-        yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.SphereAction"); });
-
-        CameraEffects.ToggleZoom(false, 1);
-
-        playerManager.SetMovementEnabled(true);
-
-        gameObject.layer = LayerNonInteractable;
+        StartCoroutine(EndInteractionRoutine());
+        
     }
+    IEnumerator EndInteractionRoutine()
+    {
+        yield return new WaitUntil(()=>animationEnded);
+        Debug.Log("EndInteraction");
+        DOVirtual.DelayedCall(1, () =>
+        {
+            playerAnimator.SetTrigger("StandUp");
+            CameraEffects.ToggleZoom(false, 1);
+            DOVirtual.DelayedCall(1, () =>
+            {
+                playerManager.SetMovementEnabled(true);
+            });
+        });
+    }
+
+    //public IEnumerator WaitForAnimationFinished()
+    //{
+    //    int LayerNonInteractable = LayerMask.NameToLayer("GROUND");
+
+    //    yield return new WaitUntil(delegate { return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.SphereAction"); });
+
+    //    CameraEffects.ToggleZoom(false, 1);
+
+    //    playerManager.SetMovementEnabled(true);
+
+    //    gameObject.layer = LayerNonInteractable;
+    //}
 
     private void OnDestroy()
     {

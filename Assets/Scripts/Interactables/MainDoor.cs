@@ -11,6 +11,8 @@ public class MainDoor : MonoBehaviour, IInteractable
     [SerializeField] private string prompt;
     public string InteractorPrompt => prompt;
 
+    public bool CanInteract => ableToInteract;
+
     public Dialogue dialogue;
 
     bool ableToInteract = true;
@@ -26,7 +28,7 @@ public class MainDoor : MonoBehaviour, IInteractable
 
         CameraEffects.ToggleZoom(false, 1);
         DialogueManager.OnDialogueFinish -= MainDoor_OnDialogueFinish;
-        playerManager.SetMovementEnabled(true);
+        playerManager.SetMovementEnabled(false);
 
         DOVirtual.DelayedCall(1, () => playerManager.SetMovementEnabled(true));
     }
@@ -39,6 +41,8 @@ public class MainDoor : MonoBehaviour, IInteractable
         {
             ableToInteract = false;
             playerManager.SetMovementEnabled(false);
+
+            playerManager.animator.SetBool("isWalking",false);
 
             CameraEffects.ToggleZoom(true, 1, ()=>{
                 CameraEffects.Shake(3, 1);

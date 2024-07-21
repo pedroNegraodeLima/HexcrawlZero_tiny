@@ -13,6 +13,8 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] private string prompt;
     public string InteractorPrompt => prompt;
 
+    public bool CanInteract => ableToInteract;
+
     public Dialogue dialogue;
 
     bool ableToInteract = true;
