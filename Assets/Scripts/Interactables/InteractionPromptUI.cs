@@ -14,6 +14,8 @@ public class InteractionPromptUI : MonoBehaviour
     {
         cam = Camera.main;
         uIPanel.SetActive(false);
+
+        DialogueManager.OnDialogueStart += (dialogue) => CloseUI();
     }
 
     void LateUpdate()
