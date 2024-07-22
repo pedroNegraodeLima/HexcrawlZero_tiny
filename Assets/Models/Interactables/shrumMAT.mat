@@ -101,7 +101,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Atunua_o_da_Sombra: 2.17
+    - _Atunua_o_da_Sombra: 1.9
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
