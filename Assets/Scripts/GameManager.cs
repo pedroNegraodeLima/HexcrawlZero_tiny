@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject quitMenu;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         quitMenu.SetActive(false);
