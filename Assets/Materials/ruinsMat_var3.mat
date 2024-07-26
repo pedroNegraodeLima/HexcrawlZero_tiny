@@ -118,7 +118,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Controle_de_Tons: 4.6
+    - _Controle_de_Tons: 3.19
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
