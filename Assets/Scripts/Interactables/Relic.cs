@@ -72,7 +72,7 @@ public class Relic : MonoBehaviour, IInteractable
         {
             playerAnimator.SetTrigger("StandUp");
             CameraEffects.ToggleZoom(false, 1);
-            DOVirtual.DelayedCall(1, () =>
+            DOVirtual.DelayedCall(1.5f, () =>
             {
                 playerManager.SetMovementEnabled(true);
             });
